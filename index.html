@@ -68,13 +68,7 @@
     <div id="cardsContainer"></div>
 
     <script>
-        const cards = [
-            'cards/test.webp',
-            'cards/card2.png',
-            'cards/card3.png',
-            'cards/card4.png',
-            'cards/card5.png',
-        ];
+        const cards = Array.from({ length: 79 }, (_, i) => `cards/${i + 1}.png`);
 
         function drawCards(num) {
             const cardsContainer = document.getElementById('cardsContainer');
