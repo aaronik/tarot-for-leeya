@@ -68,7 +68,10 @@
     <div id="cardsContainer"></div>
 
     <script>
-        const cards = Array.from({ length: 79 }, (_, i) => `cards/${i + 1}.png`);
+        // Cards have filenames 1.png, 2.png, ... 78.png
+        const baseUrl = "https://raw.githubusercontent.com/aaronik/tarot-for-leeya/73b8db43eeeae1dc2df9eea023b003dda8f0fc74/cards"
+        const cards = Array.from({ length: 78 }, (_, i) => `${baseUrl}/${i + 1}.png`);
+
 
         function drawCards(num) {
             const cardsContainer = document.getElementById('cardsContainer');
