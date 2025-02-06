@@ -1,0 +1,113 @@
+<!-- Simple web code to draw cards from a tarot deck -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarot Card Drawer</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #e94560;
+            font-family: 'Arial', sans-serif;
+        }
+        #cardsContainer {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            vertical-align: middle;
+            height: 100%;
+            align-items: center;
+            width: 100%;
+            padding: 0 10px;
+        }
+        #drawButtons {
+            margin-bottom: 20px;
+        }
+        #drawButtons button {
+            background: linear-gradient(135deg, #6a5acd, #ff69b4);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+        }
+        #drawButtons button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+        .card {
+            display: none;
+            opacity: 0;
+            transition: opacity -1.5s ease-in;
+            max-width: 250px;
+            max-height: 350px;
+            margin: 10px;
+        }
+        .card.show {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Draw Tarot Cards</h1>
+    <div id="drawButtons">
+        <button id="drawButton1" class="drawButton">Draw 1 Card</button>
+        <button id="drawButton3" class="drawButton">Draw 3 Cards</button>
+        <button id="drawButton5" class="drawButton">Draw 5 Cards</button>
+    </div>
+    <div id="cardsContainer"></div>
+
+    <script>
+        const cards = [
+            'cards/test.webp',
+            'cards/card2.png',
+            'cards/card3.png',
+            'cards/card4.png',
+            'cards/card5.png',
+        ];
+
+        function drawCards(num) {
+            const cardsContainer = document.getElementById('cardsContainer');
+            cardsContainer.innerHTML = ''; // Clear previous cards
+            const drawnCards = new Set();
+
+            while (drawnCards.size < num) {
+                const randomIndex = Math.floor(Math.random() * cards.length);
+                const selectedCard = cards[randomIndex];
+
+                if (!drawnCards.has(selectedCard)) {
+                    drawnCards.add(selectedCard);
+                    const cardImage = document.createElement('img');
+                    cardImage.src = selectedCard;
+                    cardImage.className = 'card';
+                    cardsContainer.appendChild(cardImage);
+                    cardImage.classList.add('show');
+                }
+            }
+        }
+
+        document.getElementById('drawButton1').addEventListener('click', function() {
+            drawCards(1);
+        });
+
+        document.getElementById('drawButton3').addEventListener('click', function() {
+            drawCards(3);
+        });
+
+        document.getElementById('drawButton5').addEventListener('click', function() {
+            drawCards(5);
+        });
+    </script>
+</body>
+</html>
